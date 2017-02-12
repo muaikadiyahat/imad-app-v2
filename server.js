@@ -5,12 +5,63 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var contentOne={
+  title:'Article One | murari meena',
+  heading:'Article One',
+  date:'Feb 12,2017',
+  content:`
+  <p>
+      This is my first article on the imad hasura so i am going to make my personal web application to show details about me.
+      This is very great opportunity for me to develop web application and deploy on the server.
+    </p>
+    <p>
+      This is my second article on the imad hasura so i am going to make my personal web application to show details about me.
+      This is very great opportunity for me to develop web application and deploy on the server.
+    </p>
+    <p>
+      This is my third article on the imad hasura so i am going to make my personal web application to show details about me.
+      This is very great opportunity for me to develop web application and deploy on the server.
+    </p>`
+};
+
+function createTemplate(data){
+    var title=data.title;
+    var date=data.date;
+    var heading=data.heading;
+    var content=data.content;
+    
+    var htmlTemplate=`
+    <html>
+<head>
+  <title>${title}</title>
+  <link href="/ui/style.css" rel="stylesheet"/>
+  <meta name="viewport" content="width-device-width initial-scale-1"/>
+</head>
+  
+<body>
+  <div class="container">
+  <div>
+    <a href="/">Home</a>
+  </div>
+  <hr/>
+  <h3>${heading}</h3>
+  <div>${date}</div>
+  
+  <div>
+    ${content}
+  </div>
+  </div>
+</body>
+</html>
+`;
+return htmlTemplate;
+}
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article-one',function(req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+    res.send(createTemplate(articleOne));
 });
 
 app.get('/article-two',function(req,res){
