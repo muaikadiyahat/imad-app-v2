@@ -25,4 +25,6 @@ body {
     margin: 0 auto;
     color: orange;
     font-family: sans-serif;
+    margin-left= 20px;
+    margin-right= 20px;
 }
